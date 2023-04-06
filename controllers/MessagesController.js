@@ -58,6 +58,7 @@ class MainController {
     try {
       const { userId } = req;
       const { messageId } = req.body;
+
       const message = await Messages.findOne({
         where: {
           id: messageId,
@@ -74,6 +75,45 @@ class MainController {
       }
 
       const friendId = +message.from === +userId ? message.to : message.from;
+
+      message.seen = new Date();
+      await message.save();
+
+      Socket.emitUser(friendId, 'open-message', {
+        messageId,
+        userId,
+      });
+
+      res.json({
+        status: 'ok',
+        message,
+      });
+    } catch (e) {
+      next(e);
+    }
+  };
+  static test = async (req, res, next) => {
+    try {
+      const { userId } = req;
+      const { messageId } = req.body;
+
+      const message = await Messages.findOne({
+        where: {
+          id: messageId,
+          seen: { $is: null },
+          $or: [
+            { from: userId },
+            { to: userId },
+          ],
+        },
+      });
+
+      if (!message) {
+        throw HttpError(404);
+      }
+
+      const friendId = +message.from === +userId ? message.to : message.from;
+
       message.seen = new Date();
       await message.save();
 
