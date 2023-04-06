@@ -10,7 +10,7 @@ const upload = multer({
     if (['image/png', 'image/jpeg'].includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(HttpError(422, 'Invalid File Type'), false);
+      cb(HttpError(422, 'Invalid File Type test'), false);
     }
   },
 });
