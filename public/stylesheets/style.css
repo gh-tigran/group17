@@ -1,0 +1,31 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.form__control {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.error {
+  color: red;
+  display: flex;
+  margin: 5px;
+}
+
+.active {
+  color: #00B7FF;
+}
+
+.title {
+  margin: 40px;
+  text-align: center;
+}
+
+.form-select {
+  margin-bottom: 10px;
+}
