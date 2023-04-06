@@ -38,7 +38,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
-  console.log(err);
   res.json({
     status: 'error',
     message: err.message,
