@@ -6,8 +6,11 @@ class MainController {
   static send = async (req, res, next) => {
     try {
       const { userId } = req;
-      const { friendId, message: messageText, type = 'text' } = req.body;
+      const {
+        key, friendId, message: messageText, type = 'text',
+      } = req.body;
 
+      console.log(key);
       const message = await Messages.create({
         to: friendId,
         from: userId,
