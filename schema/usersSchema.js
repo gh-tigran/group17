@@ -7,7 +7,7 @@ export default {
       lastName: Joi.string().pattern(/^[a-zA-Z]+$/).trim().required(),
       email: Joi.string().email().required(),
       password: Joi.string().trim().min(8),
-      cityId: Joi.number().string(),
+      cityId: Joi.number().integer().positive(),
     },
   },
   login: {
